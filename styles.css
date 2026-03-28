@@ -56,6 +56,49 @@ body {
     position: relative;
 }
 
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* Intro Animation Overlay */
+.intro-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--bg-base);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s var(--transition-timing, cubic-bezier(0.645, 0.045, 0.355, 1)), transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.intro-screen.fade-out {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20px);
+}
+
+.terminal-loader {
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+}
+
+.terminal-loader .cmd-prompt {
+    font-size: 1.2rem;
+    margin-right: 10px;
+}
+
+.terminal-loader .cursor {
+    color: var(--text-highlight);
+    animation: blink 1s step-end infinite;
+}
+
 /* Floating DevOps Tools Background */
 .floating-tools-bg {
     position: absolute; /* absolute makes it scroll naturally with the page */
@@ -708,7 +751,11 @@ a:hover {
 
 .modal.active {
     display: flex;
-    animation: fadeIn 0.3s ease;
+    animation: fadeInOverlay 0.3s ease forwards;
+}
+
+.modal.active .modal-content {
+    animation: zoomInImage 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
 .modal-content {
@@ -718,6 +765,8 @@ a:hover {
     border: 2px solid var(--text-highlight);
     box-shadow: 0 0 40px rgba(100, 255, 218, 0.2);
     object-fit: contain;
+    opacity: 0; /* Wait for animation */
+    transform: scale(0.8);
 }
 
 .modal-close {
@@ -729,6 +778,7 @@ a:hover {
     font-weight: bold;
     cursor: pointer;
     transition: var(--transition);
+    z-index: 1001; /* Make sure it stays on top */
 }
 
 .modal-close:hover {
@@ -736,9 +786,20 @@ a:hover {
     transform: scale(1.1);
 }
 
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
+@keyframes fadeInOverlay {
+    from { background-color: rgba(10, 14, 23, 0); backdrop-filter: blur(0px); }
+    to { background-color: rgba(10, 14, 23, 0.90); backdrop-filter: blur(8px); }
+}
+
+@keyframes zoomInImage {
+    from {
+        opacity: 0;
+        transform: scale(0.6) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
 
 /* --- ANIMATIONS & UTILS --- */

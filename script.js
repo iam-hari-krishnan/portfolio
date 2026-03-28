@@ -1,3 +1,33 @@
+// --- Intro Animation ---
+document.addEventListener("DOMContentLoaded", () => {
+    const introText = "system.init() ...";
+    const introElement = document.getElementById("intro-typing");
+    const introScreen = document.getElementById("intro-screen");
+    let i = 0;
+
+    function typeIntro() {
+        if (i < introText.length) {
+            introElement.textContent += introText.charAt(i);
+            i++;
+            setTimeout(typeIntro, 80);
+        } else {
+            setTimeout(() => {
+                introScreen.classList.add("fade-out");
+                document.body.classList.remove("no-scroll");
+                setTimeout(() => {
+                    introScreen.style.display = "none";
+                }, 800);
+            }, 600);
+        }
+    }
+
+    if (introElement && introScreen) {
+        setTimeout(typeIntro, 300);
+    } else {
+        document.body.classList.remove("no-scroll");
+    }
+});
+
 // --- Navbar Scroll Effect & Mobile Menu ---
 const navbar = document.querySelector('.navbar');
 const menuBtn = document.querySelector('.menu-btn');
