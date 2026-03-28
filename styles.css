@@ -13,9 +13,9 @@
     --alert-color: #ff5555;
     
     /* Fonts */
-    --font-heading: 'Inter', sans-serif;
-    --font-mono: 'Fira Code', monospace;
-    --font-body: 'Inter', sans-serif;
+    --font-heading: 'Montserrat', sans-serif;
+    --font-mono: 'Montserrat', sans-serif;
+    --font-body: 'Lato', sans-serif;
     
     /* Transitions */
     --transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -56,15 +56,59 @@ body {
     position: relative;
 }
 
-/* Background Particles Container */
-#particles-js {
-    position: fixed;
+/* Floating DevOps Tools Background */
+.floating-tools-bg {
+    position: absolute; /* absolute makes it scroll naturally with the page */
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%; /* covers full document height if body is relative */
     z-index: -2;
+    overflow: hidden;
+    pointer-events: none;
 }
+
+.floating-tools-bg i {
+    position: absolute;
+    color: var(--text-highlight);
+    opacity: 0.2; /* Solid visible opacity */
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+/* Animations for drifting in all directions */
+@keyframes floatUpRight { 100% { transform: translate(150px, -150px) rotate(180deg); } }
+@keyframes floatDownLeft { 100% { transform: translate(-150px, 150px) rotate(-180deg); } }
+@keyframes floatUpLeft { 100% { transform: translate(-150px, -150px) rotate(180deg); } }
+@keyframes floatDownRight { 100% { transform: translate(150px, 150px) rotate(-180deg); } }
+@keyframes floatHorizontal { 100% { transform: translateX(200px) rotate(90deg); } }
+@keyframes floatVertical { 100% { transform: translateY(200px) rotate(-90deg); } }
+
+/* Scatter 24 icons randomly and apply slow, alternating animations */
+.floating-tools-bg i:nth-child(1) { top: 5%; left: 10%; font-size: 3rem; animation: floatUpRight 80s linear infinite alternate; }
+.floating-tools-bg i:nth-child(2) { top: 15%; left: 85%; font-size: 5rem; animation: floatDownLeft 100s linear infinite alternate; }
+.floating-tools-bg i:nth-child(3) { top: 25%; left: 30%; font-size: 4rem; animation: floatHorizontal 90s linear infinite alternate; }
+.floating-tools-bg i:nth-child(4) { top: 35%; left: 75%; font-size: 6rem; animation: floatUpLeft 120s linear infinite alternate; }
+.floating-tools-bg i:nth-child(5) { top: 45%; left: 15%; font-size: 3.5rem; animation: floatVertical 100s linear infinite alternate; }
+.floating-tools-bg i:nth-child(6) { top: 55%; left: 80%; font-size: 4.5rem; animation: floatDownRight 110s linear infinite alternate; }
+.floating-tools-bg i:nth-child(7) { top: 65%; left: 25%; font-size: 5rem; animation: floatUpRight 95s linear infinite alternate; }
+.floating-tools-bg i:nth-child(8) { top: 75%; left: 60%; font-size: 3rem; animation: floatDownLeft 85s linear infinite alternate; }
+.floating-tools-bg i:nth-child(9) { top: 85%; left: 10%; font-size: 4rem; animation: floatHorizontal 105s linear infinite alternate; }
+.floating-tools-bg i:nth-child(10) { top: 95%; left: 90%; font-size: 5.5rem; animation: floatVertical 115s linear infinite alternate; }
+.floating-tools-bg i:nth-child(11) { top: 10%; left: 50%; font-size: 3.8rem; animation: floatDownRight 90s linear infinite alternate; }
+.floating-tools-bg i:nth-child(12) { top: 20%; left: 15%; font-size: 4.2rem; animation: floatUpLeft 130s linear infinite alternate; }
+.floating-tools-bg i:nth-child(13) { top: 30%; left: 90%; font-size: 3.2rem; animation: floatDownLeft 95s linear infinite alternate; }
+.floating-tools-bg i:nth-child(14) { top: 40%; left: 5%; font-size: 5.2rem; animation: floatUpRight 140s linear infinite alternate; }
+.floating-tools-bg i:nth-child(15) { top: 50%; left: 45%; font-size: 3.6rem; animation: floatHorizontal 85s linear infinite alternate; }
+.floating-tools-bg i:nth-child(16) { top: 60%; left: 10%; font-size: 4.8rem; animation: floatDownRight 100s linear infinite alternate; }
+.floating-tools-bg i:nth-child(17) { top: 70%; left: 85%; font-size: 4.1rem; animation: floatVertical 110s linear infinite alternate; }
+.floating-tools-bg i:nth-child(18) { top: 80%; left: 40%; font-size: 5.8rem; animation: floatUpLeft 125s linear infinite alternate; }
+.floating-tools-bg i:nth-child(19) { top: 90%; left: 75%; font-size: 3.5rem; animation: floatUpRight 95s linear infinite alternate; }
+.floating-tools-bg i:nth-child(20) { top: 5%; left: 70%; font-size: 4.4rem; animation: floatDownLeft 105s linear infinite alternate; }
+.floating-tools-bg i:nth-child(21) { top: 35%; left: 40%; font-size: 3.9rem; animation: floatHorizontal 115s linear infinite alternate; }
+.floating-tools-bg i:nth-child(22) { top: 65%; left: 55%; font-size: 4.7rem; animation: floatVertical 90s linear infinite alternate; }
+.floating-tools-bg i:nth-child(23) { top: 25%; left: 60%; font-size: 3.1rem; animation: floatUpLeft 100s linear infinite alternate; }
+.floating-tools-bg i:nth-child(24) { top: 85%; left: 95%; font-size: 5.1rem; animation: floatDownRight 135s linear infinite alternate; }
 
 .glow-bg {
     position: fixed;
@@ -334,6 +378,11 @@ a:hover {
     margin-bottom: 1.5rem;
     font-size: 1.05rem;
     color: var(--text-secondary);
+    text-align: justify;
+}
+
+.about-text p:last-child {
+    margin-bottom: 0;
 }
 
 .card-header {
